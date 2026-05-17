@@ -11,6 +11,7 @@ export default function Register() {
     const [password, setPassword] = useState("")
     const [avatar, setAvatar] = useState(null)
     const [coverImage, setCoverImage] = useState(null)
+    
     const navigate=useNavigate();
     const {setUser}=useAuth();
 

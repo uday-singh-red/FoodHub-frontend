@@ -20,6 +20,16 @@ const Navbar = () => {
     {/* MIDDLE LINKS */}
     <ul className="flex items-center gap-3 sm:gap-5 md:gap-6 text-lg sm:text-sm md:text-base whitespace-nowrap">
 
+      <li>
+
+      <Link to="/">
+
+         Home
+
+      </Link>
+
+   </li>
+
       {/* ONLY WHEN USER NOT LOGGED IN */}
             {
               !user && (
@@ -39,7 +49,26 @@ const Navbar = () => {
               )
             }
 
+        {
 
+           user?.role === "admin" && (
+
+              <Link
+              to="/admin"
+              className="
+              bg-red-500
+              px-4
+              py-2
+              rounded-lg
+              "
+              >
+                Admin
+              </Link>
+
+              
+
+           )
+          }
       
 
     </ul>
@@ -57,7 +86,6 @@ const Navbar = () => {
                   alt="avatar"
                   className="w-10 h-10 rounded-full object-cover"
                 />
-
               </Link>
 
             )

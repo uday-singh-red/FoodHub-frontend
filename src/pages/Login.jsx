@@ -13,6 +13,7 @@ export default function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
+  const [Error, setError] = useState("")
 
 
   const navigate = useNavigate()
@@ -45,20 +46,17 @@ export default function Login() {
       console.log("login ka data", data)
 
       if (data.success) {
-
+        setError("")
           setUser(data.data.user)
-
           console.log("user login ho gaya")
-
             navigate("/")
-
       } else {
-        alert(data.message || "Login failed")
+        setError(data.message)
       }
 
     } catch (error) {
       console.log(error)
-      alert("Something went wrong")
+      setError(data.message)
     } finally {
       setLoading(false)
     }
@@ -69,7 +67,15 @@ export default function Login() {
 
   return (
 
-    <div className="w-full min-h-screen flex items-center justify-center bg-black text-white">
+    <div className="w-full min-h-screen flex flex-col items-center justify-center bg-black text-white">
+
+      {
+   Error &&
+   <h3
+   className=" text-red-500 text-md text-center w-full mb-4" >
+      {Error}
+   </h3>
+}
 
       <form
         onSubmit={handleLogin}
