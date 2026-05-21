@@ -8,7 +8,7 @@ const Navbar = () => {
    console.log("navbar men user jo auth se a rha hai",user)
 
   return (
-   <nav className=" select-none w-full bg-black text-white px-4 sm:px-6 md:px-8 py-4">
+   <nav className=" select-none w-full bg-gray-600 text-white px-4 sm:px-6 md:px-8 py-4">
 
   <div className="flex items-center justify-between">
 

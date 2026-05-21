@@ -9,6 +9,9 @@ import Login from "./pages/Login";
 import VerifyOtp from "./pages/VerifyOtp";
 import Admin from "./pages/admin";
 import CreateProduct from "./pages/createProduct";
+import ProductInfo from "./pages/ProductInfo"
+import OrderPage from "./pages/OrderPage";
+import AdminOrders from "./pages/AdminOrders";
 
 function App() {
   return (
@@ -23,6 +26,10 @@ function App() {
         <Route path="/verify-otp" element={<VerifyOtp />} />
         <Route path="/admin" element={<Admin/>} />
         <Route path="/create-product" element={<CreateProduct/>} />
+        <Route path="/product/:id" element={<ProductInfo/>} />
+        <Route path="/order" element={<OrderPage/>} />
+        <Route path="/admin/orders" element={<AdminOrders/>} />
+
       </Routes>
     </>
   );

@@ -8,39 +8,25 @@ import ProductCard from "../components/ProductCard"
    setProducts] =
    useState([])
 
-
-
    const getProducts =
    async()=>{
-
       try{
-
          const res =
          await fetch(
-
             "http://localhost:5000/api/v1/products/all-products"
          )
 
-
-
-         const data =
-         await res.json()
-
+         const data =await res.json()
          console.log(data)
-
-
 
          if(data.success){
 
-            setProducts(
-               data.products
-            )
+            setProducts( data.products )
          }
 
       }
 
       catch(error){
-
          console.log(error)
       }
    }
@@ -48,7 +34,6 @@ import ProductCard from "../components/ProductCard"
 
 
    useEffect(()=>{
-
       getProducts()
 
    },[])
@@ -63,13 +48,13 @@ import ProductCard from "../components/ProductCard"
       min-h-screen
       bg-black
       text-white
-      p-10
+      p-2
       "
       >
 
          <h1
          className="
-         text-4xl
+         text-1xl
          font-bold
          mb-10
          "
@@ -83,7 +68,7 @@ import ProductCard from "../components/ProductCard"
          className="
          grid
          grid-cols-3
-         gap-6
+         gap-1
          "
          >
 
@@ -91,6 +76,8 @@ import ProductCard from "../components/ProductCard"
                products.map((product)=>(
 
                   <ProductCard
+
+                     _id={product._id}
 
                      key={product._id}
 
