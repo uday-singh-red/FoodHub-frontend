@@ -1,89 +1,243 @@
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { useAuth } from "../context/AuthContext"
-import { useLogout } from '../costomHook/userLogout'
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { useLogout } from "../costomHook/userLogout";
+import { FaUserShield } from "react-icons/fa";
 
 export default function Profile() {
-
-   const logout=useLogout();
-
-  const { user, loading } = useAuth()
-  
-  const navigate = useNavigate()
-
+  const logout = useLogout();
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
 
   if (loading) {
     return (
-      <div className="text-white flex justify-center items-center h-screen">
-        Loading...
+      <div className="min-h-screen flex items-center justify-center bg-[#FFF5F5]">
+        <h1 className="text-2xl font-bold text-[#FF3B4E]">
+          Loading...
+        </h1>
       </div>
-    )
+    );
   }
 
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#FFF5F5]">
+        <h1 className="text-2xl font-bold text-red-500">
+          User Not Found
+        </h1>
+      </div>
+    );
+  }
 
   return (
+    <div className="min-h-screen bg-[#FFF5F5] p-4 md:p-8">
 
-    <div className="w-full min-h-screen bg-black text-white p-6">
-
-      {/* BACK BUTTON */}
+      {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="mb-6 bg-zinc-500 px-4 py-2 rounded-lg hover:bg-zinc-700"
+        className="
+        bg-white
+        text-[#FF3B4E]
+        border
+        border-[#FF3B4E]
+        px-4
+        py-2
+        rounded-xl
+        font-semibold
+        hover:bg-[#FF3B4E]
+        hover:text-white
+        transition
+        "
       >
         ← Back
       </button>
 
+      {/* Main Card */}
+      <div
+        className="
+        max-w-4xl
+        mx-auto
+        mt-8
+        bg-white
+        rounded-3xl
+        shadow-xl
+        overflow-hidden
+        "
+      >
 
-
-      {/* PROFILE CARD */}
-      <div className="max-w-md mx-auto bg-zinc-600 p-6 rounded-xl text-center">
-
-        {/* AVATAR */}
-        <img
-          src={user?.avatar}
-          alt="avatar"
-          className="w-28 h-28 mx-auto rounded-full object-cover border-2 border-blue-500"
-        />
-
-
-
-        {/* NAME */}
-        <h1 className="text-2xl font-bold mt-4">
-          {user?.fullname}
-        </h1>
-
-
-
-        {/* USERNAME */}
-        <p className="text-gray-400">
-          @{user?.username}
-        </p>
-
-
-
-        {/* EMAIL */}
-        <p className="text-sm text-gray-500 mt-2">
-          {user?.email}
-        </p>
-
-
-
-        {/* EXTRA INFO */}
-        <div className="mt-6 text-sm text-gray-300">
-
-          <p>Account Status: Active</p>
-
+        {/* Header */}
+        <div
+          className="
+          bg-[#FF3B4E]
+          h-36
+          flex
+          items-center
+          justify-center
+          "
+        >
+          <h1 className="text-3xl md:text-4xl font-bold text-white">
+            My Profile
+          </h1>
         </div>
 
-        <button onClick={logout} className="bg-amber-800 p-2 m-1.5 rounded-2xl">
-       Logout
-        </button>
+        {/* Profile Info */}
+        <div className="px-6 md:px-10 pb-10">
 
+          {/* Avatar */}
+          <div className="flex justify-center -mt-16">
+            <img
+              src={user?.avatar?.replace("http://", "https://")}
+              alt="avatar"
+              className="
+              w-32
+              h-32
+              rounded-full
+              object-cover
+              border-4
+              border-white
+              shadow-lg
+              "
+            />
+          </div>
+
+          {/* Name */}
+          <div className="text-center mt-4">
+            <h2 className="text-3xl font-bold text-gray-800">
+              {user.fullname}
+            </h2>
+
+            <p className="text-gray-500 mt-1">
+              @{user.username}
+            </p>
+          </div>
+
+          {/* Details */}
+          <div
+            className="
+            mt-8
+            grid
+            grid-cols-1
+            md:grid-cols-2
+            gap-5
+            "
+          >
+
+            <div className="bg-[#FFF5F5] p-5 rounded-2xl">
+              <h3 className="font-bold text-[#FF3B4E] mb-2">
+                Email
+              </h3>
+
+              <p className="text-gray-700 break-all">
+                {user.email}
+              </p>
+            </div>
+
+            <div className="bg-[#FFF5F5] p-5 rounded-2xl">
+              <h3 className="font-bold text-[#FF3B4E] mb-2">
+                Account Status
+              </h3>
+
+              <p className="text-green-600 font-semibold">
+                Active
+              </p>
+            </div>
+
+            <div className="bg-[#FFF5F5] p-5 rounded-2xl">
+              <h3 className="font-bold text-[#FF3B4E] mb-2">
+                Role
+              </h3>
+
+              <p className="text-gray-700 capitalize">
+                {user.role}
+              </p>
+            </div>
+
+            <div className="bg-[#FFF5F5] p-5 rounded-2xl">
+              <h3 className="font-bold text-[#FF3B4E] mb-2">
+                Welcome
+              </h3>
+
+              <p className="text-gray-700">
+                Enjoy your delicious meals 🍔
+              </p>
+            </div>
+
+          </div>
+
+          {/* Action Buttons */}
+          <div
+            className="
+            mt-10
+            flex
+            flex-col
+            sm:flex-row
+            gap-4
+            justify-center
+            "
+          >
+
+            <button
+              onClick={() => navigate("/cart")}
+              className="
+              bg-white
+              border-2
+              border-[#FF3B4E]
+              text-[#FF3B4E]
+              px-6
+              py-3
+              rounded-xl
+              font-semibold
+              hover:bg-[#FF3B4E]
+              hover:text-white
+              transition
+              "
+            >
+              🛒 My Cart
+            </button>
+
+            <button
+              onClick={logout}
+              className="
+              bg-[#FF3B4E]
+              text-white
+              px-6
+              py-3
+              rounded-xl
+              font-semibold
+              hover:opacity-90
+              transition
+              "
+            >
+              Logout
+            </button>
+
+            {
+            user?.role === "admin" && (
+              <button
+                onClick={() => navigate("/admin")}
+                className="
+                flex
+                items-center
+                gap-2
+                bg-red-500
+                text-white
+                px-6
+                py-3
+                rounded-xl
+                font-semibold
+                hover:bg-red-600
+                transition
+                "
+              >
+                <FaUserShield />
+                <span>Admin Panel</span>
+              </button>
+            )
+          }
+
+          </div>
+
+        </div>
       </div>
-
-      
-
     </div>
-
-  )
+  );
 }

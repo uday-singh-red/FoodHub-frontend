@@ -1,14 +1,69 @@
 import { useState} from "react"
 import {useNavigate } from "react-router-dom"
 import { useAuth} from "../context/AuthContext"
+import { useCart } from "../context/CartContext"
 
 
 
 export default function ProductCard({ image,name,description,_id}){
    const navigate = useNavigate()
    const { user } = useAuth()
+   const { setCartCount } = useCart();
+   
+   
 
    const [count,setCount]= useState(1)
+   const [message,setMessage]= useState('')
+
+   const handleCart =async()=>{
+   if(!user){
+      navigate("/login")
+      return
+   }
+
+
+
+   try{
+      const res =
+      await fetch(
+"http://localhost:5000/api/v1/cart/add",
+         {
+
+            method:"POST",
+            headers:{
+               "Content-Type":
+               "application/json"
+            },
+            credentials:"include",
+            body:JSON.stringify({
+               productId:_id,
+               quantity:count
+            })
+         }
+      )
+
+      const data = await res.json()
+      console.log(data)
+
+      if(data.success){
+         setMessage(data.message)
+
+         setTimeout(()=>{
+            setMessage('')
+         },1000)
+
+         setCartCount(prev=>prev+count);
+         
+      }
+
+
+
+   }
+
+   catch(error){
+      console.log(error)
+   }
+}
 
    const handleOrder =()=>{
 
@@ -26,7 +81,21 @@ export default function ProductCard({ image,name,description,_id}){
 }
 
    return(
-      <div className="bg-gray-400">
+      <div
+      className="
+      bg-white
+      rounded-2xl
+      overflow-hidden
+      shadow-lg
+      hover:shadow-2xl
+      transition-all
+      duration-300
+      hover:-translate-y-1
+      p-2
+      "
+      >
+
+
       <div onClick={()=>{
          navigate(`/product/${_id}`)
       }}
@@ -38,21 +107,21 @@ export default function ProductCard({ image,name,description,_id}){
 
             src={image}
             alt={name}
-            className=" w-full h-[100px] sm:h-[260px] object-cover "
+            className="w-full h-[120px] sm:h-[180px] object-contain bg-[#FFF5F5]"
          />
 
 
 
          {/* CONTENT */}
 
-         <div className="p-4">
+         <div className="p-1">
 
             <h1
             className="
-            text-xl
-            sm:text-2xl
+            text-sm
+            sm:text-base
             font-bold
-            mb-2
+         text-gray-800
             "
             >
                {name}
@@ -62,9 +131,9 @@ export default function ProductCard({ image,name,description,_id}){
 
             <p
             className="
-            text-zinc-300
-            text-sm
-            sm:text-base
+          text-gray-500
+            text-xs
+            line-clamp-2
             "
             >
                {description}
@@ -73,28 +142,53 @@ export default function ProductCard({ image,name,description,_id}){
 
          </div>
 
+         <div
+         className="
+         flex
+         items-center
+         gap-1
+         mt-2
+         "
+         >
+
+         <span className="text-yellow-500">
+         ⭐
+         </span>
+
+         <span
+         className="
+         text-xs
+         font-semibold
+         text-gray-700
+         "
+         >
+         4.8
+         </span>
+
+         </div>
+
       </div>
 
                   {/* QUANTITY + ORDER */}
 
-            <div
+           <div
             className="
+            p-3
+            border-t
             flex
             flex-col
-            gap-1.5
-            items-center
-            justify-between
-            p-2
+            gap-1
             "
             >
 
                {/* QUANTITY CONTROLLER */}
 
                <div
-               className="
-               flex
-               items-center
-               gap-2
+            className="
+            flex
+            items-center
+            justify-center
+            gap-3
                "
                >
 
@@ -131,8 +225,9 @@ export default function ProductCard({ image,name,description,_id}){
 
                   <h2
                   className="
-                  text-xl
                   font-bold
+                  text-lg
+                  text-gray-800
                   "
                   >
 
@@ -174,18 +269,64 @@ export default function ProductCard({ image,name,description,_id}){
                <button onClick={handleOrder}
 
                   className="
-                  bg-green-500
-                  hover:bg-green-600
-                  transition-all
-                  px-5
+                  flex-1
+                  bg-[#FF3B4E]
+                  text-white
                   py-2
-                  rounded-lg
+                  rounded-xl
+                  font-semibold
+                  text-sm
+                  hover:opacity-90
+                  transition
                   "
                >
 
                   Order
 
                </button>
+            
+
+               {
+   message ? (
+
+      <div
+      className="
+      bg-green-400
+      text-white
+      py-2
+      rounded-xl
+      text-center
+      font-semibold
+      "
+      >
+         {message}
+      </div>
+
+   ) : (
+
+      <button
+
+      onClick={handleCart}
+
+      className="
+      flex-1
+      bg-gray-100
+      text-gray-800
+      py-2
+      rounded-xl
+      font-semibold
+      text-sm
+      hover:bg-gray-200
+      transition
+      "
+      >
+
+         Add To Cart
+
+      </button>
+
+   )
+}
 
             </div>
          

@@ -1,103 +1,170 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { useAuth } from "../context/AuthContext"
+import React from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
+import {
+  FaHome,
+  FaShoppingCart,
+  FaUserCircle,
+  FaUserShield,
+} from "react-icons/fa";
 
-const Navbar = () => {
-  const { user } = useAuth()
+export default function Navbar() {
+  const { user } = useAuth();
+  const { cartCount } = useCart();
 
-   console.log("navbar men user jo auth se a rha hai",user)
+  // Example count
+
+ 
 
   return (
-   <nav className=" select-none w-full bg-gray-600 text-white px-4 sm:px-6 md:px-8 py-4">
+    <nav className="bg-white border-b-2 border-red-500 shadow-md">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-  <div className="flex items-center justify-between">
+        <div className="h-16 flex items-center justify-between">
 
-    {/* LEFT */}
-    <h1 className="text-base sm:text-lg md:text-2xl font-bold text-blue-500 whitespace-nowrap">
-      MyTube
-    </h1>
+          {/* LEFT */}
+          <Link
+            to="/"
+            className="
+            text-2xl
+            font-bold
+            text-red-500
+            tracking-wide
+            "
+          >
+            FoodHub
+          </Link>
 
-    {/* MIDDLE LINKS */}
-    <ul className="flex items-center gap-3 sm:gap-5 md:gap-6 text-lg sm:text-sm md:text-base whitespace-nowrap">
+          {/* RIGHT */}
+          <div className="flex items-center gap-6">
 
-      <li>
-
-      <Link to="/">
-
-         Home
-
-      </Link>
-
-   </li>
-
-      {/* ONLY WHEN USER NOT LOGGED IN */}
-            {
-              !user && (
-                <>
-                  <li>
-                    <Link to="/login">
-                      Login
-                    </Link>
-                  </li>
-
-                  <li>
-                    <Link to="/register">
-                      Register
-                    </Link>
-                  </li>
-                </>
-              )
-            }
-
-        {
-
-           user?.role === "admin" && (
-
-              <Link
-              to="/admin"
+            <Link
+              to="/"
               className="
-              bg-red-500
-              px-4
-              py-2
-              rounded-lg
+              flex
+              items-center
+              gap-2
+              text-gray-700
+              hover:text-red-500
+              font-medium
+              transition
               "
-              >
-                Admin
-              </Link>
+            >
+              <FaHome />
+              <span>Home</span>
+            </Link>
 
-              
+            {user && (
+              <>
+                {/* CART */}
+                <Link
+                  to="/cart"
+                  className="
+                  relative
+                  flex
+                  items-center
+                  gap-2
+                  text-gray-700
+                  hover:text-red-500
+                  font-medium
+                  transition
+                  "
+                >
+                  <FaShoppingCart size={20} />
 
-           )
-          }
-      
+                  <span>Cart</span>
 
-    </ul>
+                  <span
+                    className="
+                    absolute
+                    -top-2
+                    -right-3
+                    bg-red-500
+                    text-white
+                    text-xs
+                    min-w-[20px]
+                    h-5
+                    flex
+                    items-center
+                    justify-center
+                    rounded-full
+                    px-1
+                    "
+                  >
+                    {cartCount}
+                  </span>
+                </Link>
 
-    {/* RIGHT */}
-    <div className="flex items-center">
+                {/* PROFILE */}
+                <Link
+                  to="/profile"
+                  className="
+                  flex
+                  items-center
+                  gap-2
+                  text-gray-700
+                  hover:text-red-500
+                  font-medium
+                  transition
+                  "
+                >
+                  {user?.avatar ? (
+                    <img
+                      src={user.avatar.replace(
+                        "http://",
+                        "https://"
+                      )}
+                      alt="avatar"
+                      className="
+                      w-10
+                      h-10
+                      rounded-full
+                      object-cover
+                      border-2
+                      border-red-500
+                      "
+                    />
+                  ) : (
+                    <FaUserCircle size={24} />
+                  )}
+                </Link>
+              </>
+            )}
 
-      {
-            user && (
+            {!user && (
+              <>
+                <Link
+                  to="/login"
+                  className="
+                  text-gray-700
+                  hover:text-red-500
+                  font-medium
+                  "
+                >
+                  Login
+                </Link>
 
-              <Link to="/profile">
+                <Link
+                  to="/register"
+                  className="
+                  bg-red-500
+                  text-white
+                  px-4
+                  py-2
+                  rounded-lg
+                  hover:bg-red-600
+                  transition
+                  "
+                >
+                  Register
+                </Link>
+              </>
+            )}
 
-                <img
-                  src={user?.avatar?.replace("http://", "https://")}
-                  alt="avatar"
-                  className="w-10 h-10 rounded-full object-cover"
-                />
-              </Link>
-
-            )
-          }
-
-
-    </div>
-
-  </div>
-
-</nav>
-  )
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
 }
-
-export default Navbar

@@ -27,29 +27,15 @@ export default function ProductInfo(){
 
    const getProduct =
    async()=>{
-
       try{
-
          const res =
-         await fetch(
+         await fetch(`http://localhost:5000/api/v1/products/${id}`)
 
-`http://localhost:5000/api/v1/products/${id}`
-
-         )
-
-
-
-         const data =
-         await res.json()
-
-
+         const data =await res.json()
 
          console.log(data)
 
-
-
          if(data.success){
-
             setProduct(
                data.product
             )
@@ -91,120 +77,216 @@ export default function ProductInfo(){
 
 
 
-   return(
+  return (
+
+  <div
+    className="
+    min-h-screen
+    bg-[#FFF5F5]
+    p-5
+    md:p-10
+    "
+  >
+
+    <div
+      className="
+      max-w-6xl
+      mx-auto
+      "
+    >
+
+      {/* BACK BUTTON */}
+
+      <button
+        onClick={() => window.history.back()}
+        className="
+        mb-6
+        text-[#FF3B4E]
+        font-semibold
+        hover:underline
+        "
+      >
+        ← Back
+      </button>
 
       <div
-      className="
-      w-full
-      min-h-screen
-      bg-black
-      text-white
-      p-5
-      sm:p-10
-      "
+        className="
+        bg-white
+        rounded-3xl
+        shadow-xl
+        p-6
+        md:p-10
+        grid
+        md:grid-cols-2
+        gap-10
+        "
       >
 
-         <div
-         className="
-         max-w-5xl
-         mx-auto
-         grid
-         md:grid-cols-2
-         gap-10
-         "
-         >
+        {/* IMAGE */}
 
-            {/* IMAGE */}
+        <div
+          className="
+          flex
+          items-center
+          justify-center
+          "
+        >
 
-            <img
+          <img
+            src={product.image}
+            alt={product.name}
+            className="
+            w-full
+            max-w-md
+            object-contain
+            rounded-2xl
+            "
+          />
 
-               src={product.image}
+        </div>
 
-               alt={product.name}
+        {/* INFO */}
 
-               className="
-               w-full
-               rounded-2xl
-               "
-            />
+        <div>
 
+          <h1
+            className="
+            text-4xl
+            md:text-5xl
+            font-bold
+            text-[#FF3B4E]
+            mb-5
+            "
+          >
+            {product.name}
+          </h1>
 
+          <p
+            className="
+            text-gray-600
+            leading-7
+            mb-8
+            "
+          >
+            {product.description}
+          </p>
 
-            {/* INFO */}
+          <h2
+            className="
+            text-2xl
+            font-semibold
+            text-gray-800
+            mb-4
+            "
+          >
+            Nutrition Details
+          </h2>
 
-            <div>
+          <div
+            className="
+            grid
+            grid-cols-2
+            gap-4
+            "
+          >
 
-               <h1
-               className="
-               text-3xl
-               sm:text-5xl
-               font-bold
-               mb-5
-               "
-               >
-                  {product.name}
-               </h1>
+            <div
+              className="
+              bg-[#FFF5F5]
+              p-4
+              rounded-xl
+              "
+            >
+              <p className="text-gray-500 text-sm">
+                Protein
+              </p>
 
-
-
-               <p
-               className="
-               text-zinc-300
-               mb-6
-               "
-               >
-                  {product.description}
-               </p>
-
-
-
-               <div
-               className="
-               space-y-3
-               text-lg
-               "
-               >
-
-                  <p>
-
-                     Protein:
-                     {product.info?.protein}
-
-                  </p>
-
-
-
-                  <p>
-
-                     Fat:
-                     {product.info?.fat}
-
-                  </p>
-
-
-
-                  <p>
-
-                     Quantity:
-                     {product.info?.quantity}
-
-                  </p>
-
-
-
-                  <p>
-
-                     Amount:
-                     {product.info?.amount}
-
-                  </p>
-
-               </div>
-
+              <h3
+                className="
+                text-xl
+                font-bold
+                text-[#FF3B4E]
+                "
+              >
+                {product.info?.protein} g
+              </h3>
             </div>
 
-         </div>
+            <div
+              className="
+              bg-[#FFF5F5]
+              p-4
+              rounded-xl
+              "
+            >
+              <p className="text-gray-500 text-sm">
+                Fat
+              </p>
+
+              <h3
+                className="
+                text-xl
+                font-bold
+                text-[#FF3B4E]
+                "
+              >
+                {product.info?.fat} g
+              </h3>
+            </div>
+
+            <div
+              className="
+              bg-[#FFF5F5]
+              p-4
+              rounded-xl
+              "
+            >
+              <p className="text-gray-500 text-sm">
+                Quantity
+              </p>
+
+              <h3
+                className="
+                text-xl
+                font-bold
+                text-[#FF3B4E]
+                "
+              >
+                {product.info?.quantity}
+              </h3>
+            </div>
+
+            <div
+              className="
+              bg-[#FFF5F5]
+              p-4
+              rounded-xl
+              "
+            >
+              <p className="text-gray-500 text-sm">
+                Amount
+              </p>
+
+              <h3
+                className="
+                text-xl
+                font-bold
+                text-[#FF3B4E]
+                "
+              >
+                ₹ {product?.price}
+              </h3>
+            </div>
+
+          </div>
+
+        </div>
 
       </div>
-   )
+
+    </div>
+
+  </div>
+
+)
 }

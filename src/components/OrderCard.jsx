@@ -1,247 +1,228 @@
 export default function OrderCard({
 
-   order,onDelivered
+   order,
+   onDelivered
 
-}){
+}) {
 
-   return(
+   return (
 
       <div
-      className="
-      w-full
-      bg-zinc-900
-      rounded-2xl
-      overflow-hidden
-      shadow-xl
-      border
-      border-zinc-800
-      hover:scale-[1.01]
-      transition-all
-      duration-300
-      "
+         className="
+         bg-white
+         rounded-3xl
+         overflow-hidden
+         shadow-lg
+         hover:shadow-2xl
+         transition-all
+         duration-300
+         border
+         border-red-100
+         "
       >
 
          {/* IMAGE */}
 
          <img
 
-            src={
-               order.product?.image
-            }
+            src={order.product?.image}
 
-            alt={
-               order.product?.name
-            }
+            alt={order.product?.name}
 
             className="
             w-full
-            h-[240px]
+            h-[220px]
             object-cover
             "
          />
-
-
 
          {/* CONTENT */}
 
          <div className="p-5">
 
-            {/* PRODUCT */}
+            {/* PRODUCT NAME */}
 
             <h1
-            className="
-            text-2xl
-            font-bold
-            text-white
-            mb-3
-            "
+               className="
+               text-2xl
+               font-bold
+               text-[#FF3B4E]
+               mb-4
+               "
             >
 
-               {
-                  order.product?.name
-               }
+               {order.product?.name}
 
             </h1>
 
-
-
             {/* USER */}
 
-            <h2
-            className="
-            text-zinc-300
-            mb-2
-            "
-            >
+            <div className="mb-2">
 
-               User:
-               {" "}
-               {
-                  order.user?.fullname
-               }
+               <span className="font-semibold text-gray-800">
+                  User:
+               </span>
 
-            </h2>
+               <span className="text-gray-600 ml-2">
+                  {order.user?.fullname}
+               </span>
 
-
+            </div>
 
             {/* PHONE */}
 
-            <h2
-            className="
-            text-zinc-300
-            mb-2
-            "
-            >
+            <div className="mb-2">
 
-               Phone:
-               {" "}
-               {
-                  order.phone
-               }
+               <span className="font-semibold text-gray-800">
+                  Phone:
+               </span>
 
-            </h2>
+               <span className="text-gray-600 ml-2">
+                  {order.phone}
+               </span>
 
-
+            </div>
 
             {/* ADDRESS */}
 
-            <p
-            className="
-            text-zinc-400
-            mb-3
-            leading-relaxed
-            "
-            >
+            <div className="mb-4">
 
-               {
-                  order.address
-               }
+               <span className="font-semibold text-gray-800">
+                  Address:
+               </span>
 
-            </p>
-
-
-
-            {/* QUANTITY */}
-
-            <div
-            className="
-            flex
-            items-center
-            justify-between
-            mb-3
-            "
-            >
-
-               <h2
-               className="
-               text-lg
-               font-semibold
-               text-white
-               "
+               <p
+                  className="
+                  text-gray-600
+                  mt-1
+                  "
                >
-
-                  Quantity:
-                  {" "}
-                  {
-                     order.quantity
-                  }
-
-               </h2>
-
-
-
-               <h2
-               className="
-               bg-green-500
-               px-4
-               py-1
-               rounded-full
-               text-sm
-               font-semibold
-               "
-               >
-
-                  {
-                     order.status
-                  }
-
-               </h2>
+                  {order.address}
+               </p>
 
             </div>
 
+            {/* QUANTITY + STATUS */}
 
+            <div
+               className="
+               flex
+               items-center
+               justify-between
+               mb-4
+               "
+            >
+
+               <h2
+                  className="
+                  font-semibold
+                  text-gray-800
+                  "
+               >
+                  Qty: {order.quantity}
+               </h2>
+
+               <span
+                  className={`
+                  px-3
+                  py-1
+                  rounded-full
+                  text-xs
+                  font-semibold
+                  ${
+                     order.status === "delivered"
+                        ? "bg-green-100 text-green-700"
+                        : "bg-yellow-100 text-yellow-700"
+                  }
+                  `}
+               >
+                  {order.status}
+               </span>
+
+            </div>
 
             {/* PAYMENT */}
 
-            <div
-            className="
-            flex
-            items-center
-            justify-between
-            "
-            >
+            <div className="mb-4">
 
                <h2
-               className="
-               text-zinc-300
-               "
+                  className="
+                  text-gray-800
+                  font-semibold
+                  "
                >
-
                   Payment:
-                  {" "}
-                  {
-                     order.paymentMethod
-                  }
-
+                  <span
+                     className="
+                     text-gray-600
+                     ml-2
+                     font-normal
+                     "
+                  >
+                     {order.paymentMethod}
+                  </span>
                </h2>
 
-
-
                {
+
                   order.paymentApp && (
 
-                     <h2
-                     className="
-                     text-blue-400
-                     "
+                     <p
+                        className="
+                        text-[#FF3B4E]
+                        text-sm
+                        mt-1
+                        "
                      >
 
-                        {
-                           order.paymentApp
-                        }
+                        {order.paymentApp}
 
-                     </h2>
+                     </p>
+
                   )
+
                }
 
-               <button
-
-   onClick={()=>
-      onDelivered(
-         order._id
-      )
-   }
-
-   className="
-   w-full
-   mt-3
-   bg-green-500
-   hover:bg-green-600
-   transition-all
-   py-2
-   rounded-lg
-   text-sm
-   "
->
-
-   Delivered
-
-</button>
-
             </div>
+
+            {/* BUTTON */}
+
+            {
+
+               order.status !== "delivered" && (
+
+                  <button
+
+                     onClick={() =>
+                        onDelivered(
+                           order._id
+                        )
+                     }
+
+                     className="
+                     w-full
+                     bg-[#FF3B4E]
+                     text-white
+                     py-3
+                     rounded-xl
+                     font-semibold
+                     hover:opacity-90
+                     transition
+                     "
+                  >
+
+                     Mark As Delivered
+
+                  </button>
+
+               )
+
+            }
 
          </div>
 
       </div>
+
    )
+
 }

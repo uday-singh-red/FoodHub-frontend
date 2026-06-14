@@ -11,6 +11,8 @@ export default function CreateProduct(){
 
    const navigate=useNavigate()
 
+   const [error,setError] = useState("")
+
     const [
    success,
    setSuccess
@@ -34,6 +36,9 @@ export default function CreateProduct(){
    const [protein,setProtein]
    = useState("")
 
+   const [category,setCategory]
+    = useState("")
+
    const [fat,setFat]
    = useState("")
 
@@ -43,7 +48,7 @@ export default function CreateProduct(){
    ] = useState("")
 
    const [amount,setAmount]
-   = useState("")
+   = useState(0)
 
 
 
@@ -96,8 +101,13 @@ export default function CreateProduct(){
          )
 
          formData.append(
-            "amount",
+            "price",
             amount
+         )
+
+         formData.append(
+            "category",
+            category
          )
 
 
@@ -120,15 +130,23 @@ export default function CreateProduct(){
 
 
          const data =await res.json()
-         console.log(data)
+         console.log(data.message)
 
          if(data.success){
 
              setSuccess(data.message)
 
+                setTimeout(()=>{
+                        setSuccess("")
+                     },3000)
+         }
+
+         else{
+            setError(data.message)
+
             setTimeout(()=>{
-                navigate("/")
-            },2000)
+               setError("")
+            },3000)
          }
 
       }
@@ -136,6 +154,7 @@ export default function CreateProduct(){
       catch(error){
 
          console.log(error)
+          setSuccess("Something went wrong")
       }
    }
 
@@ -145,14 +164,14 @@ export default function CreateProduct(){
 
       <div
       className="
+      relative
       w-full
-      min-h-screen
-      bg-black
-      text-white
-      flex
-      items-center
-      justify-center
+      max-w-xl
+      bg-white
+      rounded-3xl
+      shadow-xl
       p-5
+      md:p-6
       "
       >
 
@@ -161,33 +180,26 @@ export default function CreateProduct(){
          onClick={()=>
             navigate("/admin")
          }
-            className="mb-6 bg-zinc-500 px-4 py-2 rounded-lg hover:bg-zinc-700"
+            className="
+            absolute
+            top-4
+            left-4
+            z-10
+            w-10
+            h-10
+            rounded-full
+            bg-white
+            shadow-md
+            text-gray-700
+            hover:shadow-lg
+            "
          
       >
 
-         ← Back
+         ← 
 
       </button>
 
-
-       {
-         success && (
-
-            <h2
-            className="
-            bg-green-500
-            p-3
-            rounded-lg
-            mb-5
-            text-center
-            "
-            >
-
-               {success}
-
-            </h2>
-         )
-      }
 
          <form
 
@@ -195,22 +207,109 @@ export default function CreateProduct(){
 
             className="
             w-full
-            max-w-2xl
-            bg-zinc-900
-            p-8
-            rounded-2xl
+            max-w-xl
+            bg-white
+            rounded-3xl
+            shadow-xl
+            p-5
+            md:p-6
+
             "
          >
 
             <h1
             className="
-            text-3xl
+          text-2xl
             font-bold
-            mb-8
+            text-gray-800
+            mb-6
+            text-center
             "
             >
                Create Product
             </h1>
+
+
+            {
+success && (
+
+   <div
+   className="
+   mb-5
+   px-4
+   py-3
+   rounded-2xl
+   border
+   border-green-300
+   bg-green-50
+   flex
+   items-center
+   gap-3
+   animate-pulse
+   "
+   >
+
+      <span
+      className="
+      text-green-600
+      text-xl
+      "
+      >
+         ✅
+      </span>
+
+      <p
+      className="
+      text-green-700
+      font-medium
+      text-sm
+      sm:text-base
+      "
+      >
+         {success}
+      </p>
+
+   </div>
+
+)
+}
+
+{
+error && (
+
+   <div
+   className="
+   mb-4
+   px-4
+   py-3
+   rounded-2xl
+   border
+   border-red-300
+   bg-red-50
+   flex
+   items-center
+   gap-3
+   "
+   >
+
+      <span className="text-red-600">
+         ❌
+      </span>
+
+      <p
+      className="
+      text-red-700
+      text-sm
+      font-medium
+      "
+      >
+         {error}
+      </p>
+
+   </div>
+
+)
+}
 
 
 
@@ -230,11 +329,14 @@ export default function CreateProduct(){
 
                className="
                w-full
-               p-3
-               mb-4
-               rounded-lg
-               bg-zinc-800
+               h-11
+               px-4
+               rounded-xl
+               border
+               border-gray-200
+               bg-white
                outline-none
+               focus:border-[#FF3B4E]
                "
             />
 
@@ -255,13 +357,15 @@ export default function CreateProduct(){
                }
 
                className="
-               w-full
-               p-3
-               mb-4
-               rounded-lg
-               bg-zinc-800
-               outline-none
-               h-[120px]
+          w-full
+            h-28
+            p-4
+            rounded-xl
+            border
+            border-gray-200
+            resize-none
+            outline-none
+            focus:border-[#FF3B4E]
                "
             />
 
@@ -269,43 +373,81 @@ export default function CreateProduct(){
 
             {/* IMAGE */}
 
-            <input
+           <div
+            className="
+            border-2
+            border-dashed
+            border-gray-300
+            rounded-2xl
+            p-6
+            text-center
+            bg-[#FFF5F5]
+            "
+            >
 
-               type="file"
+               <label
+               className="
+               cursor-pointer
+               bg-[#e78892]
+               text-white
+               px-5
+               py-2
+               rounded-xl
+               inline-block
+               font-medium
+               hover:opacity-90
+               transition
+               "
+               >
+                  Add Image
 
-               onChange={(e)=>
-                  setImage(
-                     e.target.files[0]
+                  <input
+                  type="file"
+                  className="hidden"
+                  onChange={(e)=>setImage(e.target.files[0])}
+                  />
+               </label>
+
+               {
+                  image && (
+                     <p
+                     className="
+                     mt-3
+                     text-sm
+                     text-gray-600
+                     break-all
+                     "
+                     >
+                        {image.name}
+                     </p>
                   )
                }
 
-               className="
-               w-full
-               mb-6
-               "
-            />
-
+            </div>
 
 
             {/* INFO SECTION */}
 
             <h2
             className="
-            text-2xl
-            font-bold
-            mb-5
+            text-lg
+            font-semibold
+            text-gray-700
+            mb-4
+            mt-2
             "
             >
-               Product Information
+            Product Information
             </h2>
 
 
 
-            <div
+           <div
             className="
             grid
+            grid-cols-1
             sm:grid-cols-2
-            gap-4
+            gap-3
             "
             >
 
@@ -326,10 +468,15 @@ export default function CreateProduct(){
                   }
 
                   className="
-                  p-3
-                  rounded-lg
-                  bg-zinc-800
-                  outline-none
+                w-full
+               h-11
+               px-4
+               rounded-xl
+               border
+               border-gray-200
+               bg-white
+               outline-none
+               focus:border-[#FF3B4E]
                   "
                />
 
@@ -352,10 +499,15 @@ export default function CreateProduct(){
                   }
 
                   className="
-                  p-3
-                  rounded-lg
-                  bg-zinc-800
-                  outline-none
+               w-full
+               h-11
+               px-4
+               rounded-xl
+               border
+               border-gray-200
+               bg-white
+               outline-none
+               focus:border-[#FF3B4E]
                   "
                />
 
@@ -378,10 +530,15 @@ export default function CreateProduct(){
                   }
 
                   className="
-                  p-3
-                  rounded-lg
-                  bg-zinc-800
-                  outline-none
+               w-full
+               h-11
+               px-4
+               rounded-xl
+               border
+               border-gray-200
+               bg-white
+               outline-none
+               focus:border-[#FF3B4E]
                   "
                />
 
@@ -393,7 +550,7 @@ export default function CreateProduct(){
 
                   type="text"
 
-                  placeholder="Amount"
+                  placeholder="Price"
 
                   value={amount}
 
@@ -404,12 +561,66 @@ export default function CreateProduct(){
                   }
 
                   className="
-                  p-3
-                  rounded-lg
-                  bg-zinc-800
+                 w-full
+                  h-11
+                  px-4
+                  rounded-xl
+                  border
+                  border-gray-200
+                  bg-white
                   outline-none
+                  focus:border-[#FF3B4E]one
                   "
                />
+
+               <select
+
+               value={category}
+
+               onChange={(e)=>
+                  setCategory(
+                     e.target.value
+                  )
+               }
+
+               className="
+               w-full
+               h-11
+               px-4
+               rounded-xl
+               border
+               border-gray-200
+               bg-white
+               outline-none
+               focus:border-[#FF3B4E]
+"
+            >
+
+               <option value="">
+                  Select Category
+               </option>
+
+               <option value="Burger">
+                  Burger
+               </option>
+
+               <option value="Pizza">
+                  Pizza
+               </option>
+
+               <option value="Drinks">
+                  Drinks
+               </option>
+
+               <option value="Dessert">
+                  Dessert
+               </option>
+
+               <option value="Fast Food">
+                  Fast Food
+               </option>
+
+            </select>
 
             </div>
 
@@ -418,24 +629,52 @@ export default function CreateProduct(){
             {/* BUTTON */}
 
             <button
-
-               type="submit"
-
-               className="
-               w-full
-               mt-8
-               bg-blue-500
-               hover:bg-blue-600
-               transition-all
-               py-3
-               rounded-lg
-               text-lg
-               "
+            onClick={()=>{
+               setName("")
+               setDescription("")
+               setImage(null)
+               setProtein("")
+               setFat("")
+               setQuantity("")
+               setAmount("")
+               setCategory("")
+            }}
+            className="
+            absolute
+            top-4
+            right-4
+            z-50
+            w-10
+            h-10
+            rounded-full
+            bg-[#FF3B4E]
+            text-white
+            text-2xl
+            shadow-lg
+            hover:scale-110
+            transition
+            "
             >
-
-               Create Product
-
+            +
             </button>
+
+            <button
+            type="submit"
+            className="
+            w-full
+            mt-6
+            bg-[#FF3B4E]
+            text-white
+            font-semibold
+            py-3
+            rounded-2xl
+            hover:opacity-90
+            transition
+            "
+            >
+            Create Product
+            </button>
+            
 
          </form>
 

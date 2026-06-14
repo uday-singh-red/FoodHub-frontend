@@ -12,6 +12,9 @@ import CreateProduct from "./pages/createProduct";
 import ProductInfo from "./pages/ProductInfo"
 import OrderPage from "./pages/OrderPage";
 import AdminOrders from "./pages/AdminOrders";
+import Cart from "./pages/Cart";
+import AdminEdit from "./pages/adminEdit";
+
 
 function App() {
   return (
@@ -29,6 +32,8 @@ function App() {
         <Route path="/product/:id" element={<ProductInfo/>} />
         <Route path="/order" element={<OrderPage/>} />
         <Route path="/admin/orders" element={<AdminOrders/>} />
+        <Route path="/cart" element={<Cart/>} />
+        <Route path="/admin/Edit" element={<AdminEdit/>} />
 
       </Routes>
     </>

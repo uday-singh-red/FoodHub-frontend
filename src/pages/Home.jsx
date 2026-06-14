@@ -1,8 +1,10 @@
 
 import { useEffect,useState,React } from "react"
 import ProductCard from "../components/ProductCard"
+import { Await } from "react-router-dom"
 
   export default function Home(){
+
 
    const [products,
    setProducts] =
@@ -17,7 +19,7 @@ import ProductCard from "../components/ProductCard"
          )
 
          const data =await res.json()
-         console.log(data)
+
 
          if(data.success){
 
@@ -46,7 +48,7 @@ import ProductCard from "../components/ProductCard"
       className="
       w-full
       min-h-screen
-      bg-black
+     bg-[#FFF5F5]
       text-white
       p-2
       "
@@ -67,8 +69,10 @@ import ProductCard from "../components/ProductCard"
          <div
          className="
          grid
-         grid-cols-3
-         gap-1
+         grid-cols-2
+         md:grid-cols-4
+         lg:grid-cols-5
+         gap-4
          "
          >
 

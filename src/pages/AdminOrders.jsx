@@ -105,85 +105,151 @@ async(orderId)=>{
 
 
 
-   return(
+   return (
+
+  <div
+    className="
+    min-h-screen
+    bg-[#FFF5F5]
+    p-5
+    md:p-10
+    "
+  >
+
+    <div
+      className="
+      max-w-7xl
+      mx-auto
+      "
+    >
+
+      {/* TOP BAR */}
 
       <div
-      className="
-      w-full
-      min-h-screen
-      bg-black
-      text-white
-      p-10
-      "
+        className="
+        flex
+        flex-col
+        sm:flex-row
+        sm:items-center
+        sm:justify-between
+        gap-4
+        mb-8
+        "
       >
 
         <button
 
-         onClick={()=>
+          onClick={() =>
             navigate("/admin")
-         }
+          }
 
-         className="
-            
-            top-22
-            left-4
-            z-50
-            bg-zinc-800
-            hover:bg-zinc-700
-            transition-all
-            px-5
-            py-2
-            rounded-xl
-            text-white
-            shadow-lg
-         "
-      >
+          className="
+          bg-white
+          border-2
+          border-[#FF3B4E]
+          text-[#FF3B4E]
+          px-5
+          py-2
+          rounded-xl
+          font-semibold
+          hover:bg-[#FF3B4E]
+          hover:text-white
+          transition
+          w-fit
+          "
+        >
 
-         ← Back
+          ← Back
 
-      </button>
+        </button>
 
-         <h1
-         className="
-         text-4xl
-         font-bold
-         mb-10
-         "
-         >
-            Orders
-         </h1>
-
-
-
-       <div
-            className="
-            grid
-            grid-cols-1
-            md:grid-cols-2
-            xl:grid-cols-3
-            gap-6
-            "
-            >
-
-            {
-                orders.map((order)=>(
-
-                    <OrderCard
-
-                        key={order._id}
-
-                        order={order}
-
-                        onDelivered={
-                      handleDelivered
-                                    }
-                    />
-                ))
-            }
+        <h1
+          className="
+          text-3xl
+          md:text-5xl
+          font-bold
+          text-[#FF3B4E]
+          "
+        >
+          Orders
+        </h1>
 
       </div>
-         </div>
 
-    
-   )
+      {/* EMPTY STATE */}
+
+      {
+        orders.length === 0 && (
+
+          <div
+            className="
+            bg-white
+            rounded-3xl
+            shadow-lg
+            p-10
+            text-center
+            "
+          >
+
+            <h2
+              className="
+              text-2xl
+              font-bold
+              text-gray-700
+              "
+            >
+              No Orders Found
+            </h2>
+
+            <p
+              className="
+              text-gray-500
+              mt-2
+              "
+            >
+              Orders will appear here.
+            </p>
+
+          </div>
+
+        )
+      }
+
+      {/* ORDERS GRID */}
+
+      <div
+        className="
+        grid
+        grid-cols-1
+        md:grid-cols-2
+        xl:grid-cols-3
+        gap-6
+        "
+      >
+
+        {
+          orders.map((order) => (
+
+            <OrderCard
+
+              key={order._id}
+
+              order={order}
+
+              onDelivered={
+                handleDelivered
+              }
+
+            />
+
+          ))
+        }
+
+      </div>
+
+    </div>
+
+  </div>
+
+)
 }

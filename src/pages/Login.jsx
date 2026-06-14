@@ -14,6 +14,7 @@ export default function Login() {
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
   const [Error, setError] = useState("")
+  const [success, setSuccess] = useState("")
 
 
   const navigate = useNavigate()
@@ -22,6 +23,7 @@ export default function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault()
+    console.log(email)
 
     try {
       setLoading(true)
@@ -46,12 +48,20 @@ export default function Login() {
       console.log("login ka data", data)
 
       if (data.success) {
-        setError("")
-          setUser(data.data.user)
-          console.log("user login ho gaya")
+          setError("")
+      setSuccess(data.message)
+
+        setTimeout(()=>{
+          setSuccess('');
+        },2000);
+
             navigate("/")
       } else {
         setError(data.message)
+
+        setTimeout(()=>{
+          setError('');
+        },2000);
       }
 
     } catch (error) {
@@ -67,80 +77,210 @@ export default function Login() {
 
   return (
 
-    <div className="w-full min-h-screen flex flex-col items-center justify-center bg-black text-white">
+  <div
+    className="
+    min-h-screen
+    bg-[#FFF5F5]
+    flex
+    items-center
+    justify-center
+    p-4
+    "
+  >
+
+    <div
+      className="
+      w-full
+      max-w-md
+      bg-white
+      rounded-3xl
+      shadow-xl
+      p-8
+      "
+    >
+
+      {/* HEADING */}
+
+      <div className="text-center mb-8">
+
+        <h1
+          className="
+          text-4xl
+          font-bold
+          text-[#FF3B4E]
+          "
+        >
+          FoodHub
+        </h1>
+
+        <p
+          className="
+          text-gray-500
+          mt-2
+          "
+        >
+          Login to continue
+        </p>
+
+      </div>
+
+      {/* ERROR */}
 
       {
-   Error &&
-   <h3
-   className=" text-red-500 text-md text-center w-full mb-4" >
-      {Error}
-   </h3>
-}
+        Error && (
+          <div className="
+            bg-red-100
+            border
+            border-red-300
+            text-red-600
+            rounded-xl
+            p-3
+            mb-4
+            text-center
+          ">
+            {Error}
+          </div>
+        )
+      }
+      {
+        success && (
+          <div className="
+            bg-red-100
+            border
+            border-red-300
+            text-red-600
+            rounded-xl
+            p-3
+            mb-4
+            text-center
+          ">
+            {success}
+          </div>
+        )
+      }
 
       <form
         onSubmit={handleLogin}
-        className="w-[350px] bg-zinc-900 p-6 rounded-xl"
+        className="
+        flex
+        flex-col
+        gap-4
+        "
       >
 
-        <h1 className="text-2xl font-bold mb-6 text-center">
-          Login
-        </h1>
-
         {/* EMAIL */}
+
         <input
           type="email"
-          placeholder="Email"
+          placeholder="Enter Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-3 mb-4 bg-zinc-800 rounded-lg outline-none"
+          onChange={(e)=>{
+             console.log(email);
+            setEmail(e.target.value)
+           
+          }
+          }
+          className="
+          w-full
+          p-3
+          border
+          border-gray-300
+          rounded-xl
+          outline-none
+          focus:border-[#FF3B4E]
+          "
         />
-
-
 
         {/* PASSWORD */}
+
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Enter Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-3 mb-4 bg-zinc-800 rounded-lg outline-none"
+          onChange={(e)=>setPassword(e.target.value)}
+          className="
+          w-full
+          p-3
+          border
+          border-gray-300
+          rounded-xl
+          outline-none
+          focus:border-[#FF3B4E]
+          "
         />
 
+        {/* LOGIN BUTTON */}
 
-
-        {/* BUTTON */}
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-500 hover:bg-blue-600 py-2 rounded-lg font-semibold"
+          className="
+          bg-[#FF3B4E]
+          text-white
+          py-3
+          rounded-xl
+          font-semibold
+          hover:opacity-90
+          transition
+          "
         >
-          {loading ? "Logging in..." : "Login"}
+          {
+            loading
+            ? "Logging In..."
+            : "Login"
+          }
         </button>
 
-    
+        {/* GOOGLE */}
+
         <button
-        type="button"
-        onClick={googleLogin}
-        className="w-full bg-red-500 hover:bg-red-600 py-2 my-4 rounded-lg font-semibold"
-      >
-        Continue with Google
-      </button>
-
-
-        {/* REGISTER LINK */}
-        <p className="text-sm text-center mt-4 text-gray-400">
-          Don't have an account?{" "}
-          <span
-            onClick={() => navigate("/register")}
-            className="text-blue-400 cursor-pointer"
-          >
-            Register
-          </span>
-        </p>
+          type="button"
+          onClick={googleLogin}
+          className="
+          border-2
+          border-[#FF3B4E]
+          text-[#FF3B4E]
+          py-3
+          rounded-xl
+          font-semibold
+          hover:bg-[#FF3B4E]
+          hover:text-white
+          transition
+          "
+        >
+          Continue With Google
+        </button>
 
       </form>
 
+      {/* REGISTER */}
+
+      <p
+        className="
+        text-center
+        text-gray-600
+        mt-6
+        "
+      >
+        Don't have an account?
+
+        <span
+          onClick={() => navigate("/register")}
+          className="
+          text-[#FF3B4E]
+          font-semibold
+          cursor-pointer
+          ml-1
+          "
+        >
+          Register
+        </span>
+
+      </p>
+
     </div>
 
-  )
+  </div>
+
+)
 }
