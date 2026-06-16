@@ -9,15 +9,14 @@ export default function OrderCard({
 
       <div
          className="
-         bg-white
-         rounded-3xl
+        bg-white
+         rounded-2xl
          overflow-hidden
          shadow-lg
-         hover:shadow-2xl
-         transition-all
-         duration-300
          border
          border-red-100
+         max-w-[320px]
+         mx-auto
          "
       >
 
@@ -31,14 +30,14 @@ export default function OrderCard({
 
             className="
             w-full
-            h-[220px]
+            h-[200px]
             object-cover
             "
          />
 
          {/* CONTENT */}
 
-         <div className="p-5">
+         <div className="p-3">
 
             {/* PRODUCT NAME */}
 
@@ -47,7 +46,7 @@ export default function OrderCard({
                text-2xl
                font-bold
                text-[#FF3B4E]
-               mb-4
+               
                "
             >
 
@@ -57,7 +56,7 @@ export default function OrderCard({
 
             {/* USER */}
 
-            <div className="mb-2">
+            <div className="">
 
                <span className="font-semibold text-gray-800">
                   User:
@@ -71,7 +70,7 @@ export default function OrderCard({
 
             {/* PHONE */}
 
-            <div className="mb-2">
+            <div className="">
 
                <span className="font-semibold text-gray-800">
                   Phone:
@@ -85,7 +84,7 @@ export default function OrderCard({
 
             {/* ADDRESS */}
 
-            <div className="mb-4">
+            <div className="">
 
                <span className="font-semibold text-gray-800">
                   Address:
@@ -94,7 +93,7 @@ export default function OrderCard({
                <p
                   className="
                   text-gray-600
-                  mt-1
+                  
                   "
                >
                   {order.address}
@@ -109,7 +108,7 @@ export default function OrderCard({
                flex
                items-center
                justify-between
-               mb-4
+               mb-2
                "
             >
 
@@ -143,7 +142,7 @@ export default function OrderCard({
 
             {/* PAYMENT */}
 
-            <div className="mb-4">
+            <div className="mb-2">
 
                <h2
                   className="
