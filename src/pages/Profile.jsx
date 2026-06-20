@@ -233,6 +233,29 @@ export default function Profile() {
               </button>
             )
           }
+            {
+            user?.role === "shopkeeper" && (
+              <button
+                onClick={() => navigate("/admin")}
+                className="
+                flex
+                items-center
+                gap-2
+                bg-red-500
+                text-white
+                px-6
+                py-3
+                rounded-xl
+                font-semibold
+                hover:bg-red-600
+                transition
+                "
+              >
+                <FaUserShield />
+                <span>DashBoard</span>
+              </button>
+            )
+          }
 
           </div>
 

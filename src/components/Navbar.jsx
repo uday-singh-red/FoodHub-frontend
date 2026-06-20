@@ -7,6 +7,7 @@ import {
   FaShoppingCart,
   FaUserCircle,
   FaUserShield,
+  FaStore
 } from "react-icons/fa";
 
 export default function Navbar() {
@@ -95,6 +96,24 @@ export default function Navbar() {
                     {cartCount}
                   </span>
                 </Link>
+
+                {user?.role === "user" && (
+                  <Link
+                    to="/create-shop"
+                    className="
+                    flex
+                    items-center
+                    gap-2
+                    text-gray-700
+                    hover:text-red-500
+                    font-medium
+                    transition
+                    "
+                  >
+                    <FaStore />
+                    <span>Create Shop</span>
+                  </Link>
+                )}
 
                 {/* PROFILE */}
                 <Link

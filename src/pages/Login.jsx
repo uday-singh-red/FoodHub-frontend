@@ -45,11 +45,12 @@ export default function Login() {
 
       const data = await res.json()
 
-      console.log("login ka data", data)
+      console.log("login ka data", data.data.user)
 
       if (data.success) {
           setError("")
       setSuccess(data.message)
+      setUser(data.data.user)
 
         setTimeout(()=>{
           setSuccess('');
