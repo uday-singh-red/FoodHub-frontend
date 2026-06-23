@@ -1,10 +1,12 @@
 import { useRef} from "react"
+import { useNavigate } from "react-router-dom"
 
 
 
 export default function CartCard({ item , getCart, cart, setCart}){
 
 const debounceRef = useRef(null)
+const navigate = useNavigate()
 
 // this is function of update the card quantity
 const updateQty =async(newQty)=>{
@@ -124,9 +126,14 @@ const updateQty =async(newQty)=>{
       "
       >
 
-         <img
+         <img onClick={ ()=>{
+             navigate(`/product/${item.product._id}`)
+         }
+            
+         
+         }
             src={
-               item.product.image
+               item.product.images[0].url
             }
             alt={
                item.product.name

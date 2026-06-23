@@ -79,214 +79,543 @@ export default function ProductInfo(){
 
   return (
 
-  <div
-    className="
-    min-h-screen
-    bg-[#FFF5F5]
-    p-5
-    md:p-10
-    "
-  >
+<div
+className="
+min-h-screen
+bg-[#FFF5F5]
+p-4
+md:p-8
+"
+>
 
-    <div
-      className="
-      max-w-6xl
-      mx-auto
-      "
-    >
+<div
+className="
+max-w-6xl
+mx-auto
+"
+>
 
-      {/* BACK BUTTON */}
+<button
+onClick={() => window.history.back()}
+className="
+mb-5
+px-4
+py-2
+bg-white
+rounded-xl
+shadow
+text-[#FF3B4E]
+font-semibold
+"
+>
+← Back
+</button>
 
-      <button
-        onClick={() => window.history.back()}
-        className="
-        mb-6
-        text-[#FF3B4E]
-        font-semibold
-        hover:underline
-        "
-      >
-        ← Back
-      </button>
+<div
+className="
+grid
+lg:grid-cols-2
+gap-6
+"
+>
 
-      <div
-        className="
-        bg-white
-        rounded-3xl
-        shadow-xl
-        p-6
-        md:p-10
-        grid
-        md:grid-cols-2
-        gap-10
-        "
-      >
+{/* IMAGE */}
 
-        {/* IMAGE */}
+<div
+className="
+bg-white
+rounded-3xl
+shadow-lg
+p-4
+"
+>
 
-        <div
-          className="
-          flex
-          items-center
-          justify-center
-          "
-        >
+<img
+src={product.images?.[0]?.url}
+alt={product.name}
+className="
+w-full
+h-[350px]
+object-contain
+rounded-2xl
+"
+/>
 
-          <img
-            src={product.image}
-            alt={product.name}
-            className="
-            w-full
-            max-w-md
-            object-contain
-            rounded-2xl
-            "
-          />
+</div>
 
-        </div>
+{/* RIGHT SIDE */}
 
-        {/* INFO */}
+<div
+className="
+flex
+flex-col
+gap-5
+"
+>
 
-        <div>
+{/* BASIC INFO */}
 
-          <h1
-            className="
-            text-4xl
-            md:text-5xl
-            font-bold
-            text-[#FF3B4E]
-            mb-5
-            "
-          >
-            {product.name}
-          </h1>
+<div
+className="
+bg-white
+rounded-3xl
+shadow-lg
+p-6
+"
+>
 
-          <p
-            className="
-            text-gray-600
-            leading-7
-            mb-8
-            "
-          >
-            {product.description}
-          </p>
+<div
+className="
+flex
+justify-between
+items-start
+gap-3
+"
+>
 
-          <h2
-            className="
-            text-2xl
-            font-semibold
-            text-gray-800
-            mb-4
-            "
-          >
-            Nutrition Details
-          </h2>
+<div>
 
-          <div
-            className="
-            grid
-            grid-cols-2
-            gap-4
-            "
-          >
+<h1
+className="
+text-3xl
+font-bold
+text-gray-800
+"
+>
+{product.name}
+</h1>
 
-            <div
-              className="
-              bg-[#FFF5F5]
-              p-4
-              rounded-xl
-              "
-            >
-              <p className="text-gray-500 text-sm">
-                Protein
-              </p>
+<p
+className="
+text-sm
+text-gray-500
+mt-1
+"
+>
+{product.category}
+</p>
 
-              <h3
-                className="
-                text-xl
-                font-bold
-                text-[#FF3B4E]
-                "
-              >
-                {product.info?.protein} g
-              </h3>
-            </div>
+</div>
 
-            <div
-              className="
-              bg-[#FFF5F5]
-              p-4
-              rounded-xl
-              "
-            >
-              <p className="text-gray-500 text-sm">
-                Fat
-              </p>
+<div
+className="
+text-right
+"
+>
 
-              <h3
-                className="
-                text-xl
-                font-bold
-                text-[#FF3B4E]
-                "
-              >
-                {product.info?.fat} g
-              </h3>
-            </div>
+<h2
+className="
+text-3xl
+font-bold
+text-[#FF3B4E]
+"
+>
+₹{product.price}
+</h2>
 
-            <div
-              className="
-              bg-[#FFF5F5]
-              p-4
-              rounded-xl
-              "
-            >
-              <p className="text-gray-500 text-sm">
-                Quantity
-              </p>
+{
+product.discountedPrice > 0 && (
 
-              <h3
-                className="
-                text-xl
-                font-bold
-                text-[#FF3B4E]
-                "
-              >
-                {product.info?.quantity}
-              </h3>
-            </div>
+<p
+className="
+text-sm
+line-through
+text-gray-400
+"
+>
+₹{product.discountedPrice}
+</p>
 
-            <div
-              className="
-              bg-[#FFF5F5]
-              p-4
-              rounded-xl
-              "
-            >
-              <p className="text-gray-500 text-sm">
-                Amount
-              </p>
+)
+}
 
-              <h3
-                className="
-                text-xl
-                font-bold
-                text-[#FF3B4E]
-                "
-              >
-                ₹ {product?.price}
-              </h3>
-            </div>
+</div>
 
-          </div>
+</div>
 
-        </div>
+<p
+className="
+mt-4
+text-gray-600
+leading-7
+"
+>
+{product.description}
+</p>
 
-      </div>
+</div>
 
-    </div>
+{/* TAGS */}
 
-  </div>
+<div
+className="
+bg-white
+rounded-3xl
+shadow-lg
+p-6
+"
+>
+
+<h2
+className="
+font-bold
+text-lg
+mb-4
+"
+>
+Product Tags
+</h2>
+
+<div
+className="
+flex
+flex-wrap
+gap-3
+"
+>
+
+{product.isVeg && (
+<span className="px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm">
+🥗 Veg
+</span>
+)}
+
+{product.isVegan && (
+<span className="px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm">
+🌱 Vegan
+</span>
+)}
+
+{product.isSpicy && (
+<span className="px-3 py-1 rounded-full bg-red-100 text-red-700 text-sm">
+🌶️ Spicy
+</span>
+)}
+
+{product.isFeatured && (
+<span className="px-3 py-1 rounded-full bg-yellow-100 text-yellow-700 text-sm">
+⭐ Featured
+</span>
+)}
+
+{product.isBestSeller && (
+<span className="px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-sm">
+🔥 Best Seller
+</span>
+)}
+
+</div>
+
+</div>
+
+{/* QUICK STATS */}
+
+<div
+className="
+bg-white
+rounded-3xl
+shadow-lg
+p-6
+"
+>
+
+<h2
+className="
+font-bold
+text-lg
+mb-4
+"
+>
+Quick Information
+</h2>
+
+<div
+className="
+grid
+grid-cols-2
+gap-4
+"
+>
+
+<div className="bg-[#FFF5F5] rounded-xl p-3">
+<p className="text-gray-500 text-sm">
+Stock
+</p>
+<h3 className="font-bold">
+{product.stock}
+</h3>
+</div>
+
+{
+product.preparationTime && (
+
+<div className="bg-[#FFF5F5] rounded-xl p-3">
+<p className="text-gray-500 text-sm">
+Preparation
+</p>
+<h3 className="font-bold">
+{product.preparationTime} min
+</h3>
+</div>
+
+)
+}
+
+<div className="bg-[#FFF5F5] rounded-xl p-3">
+<p className="text-gray-500 text-sm">
+Rating
+</p>
+<h3 className="font-bold">
+⭐ {product.averageRating}
+</h3>
+</div>
+
+<div className="bg-[#FFF5F5] rounded-xl p-3">
+<p className="text-gray-500 text-sm">
+Reviews
+</p>
+<h3 className="font-bold">
+{product.totalReviews}
+</h3>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{/* NUTRITION */}
+
+{
+(
+product.nutrition?.calories ||
+product.nutrition?.protein ||
+product.nutrition?.carbs ||
+product.nutrition?.fat
+) && (
+
+<div
+className="
+bg-white
+rounded-3xl
+shadow-lg
+p-6
+mt-6
+"
+>
+
+<h2
+className="
+font-bold
+text-xl
+mb-5
+"
+>
+Nutrition Information
+</h2>
+
+<div
+className="
+grid
+grid-cols-2
+md:grid-cols-4
+gap-4
+"
+>
+
+{
+product.nutrition?.calories && (
+
+<div className="bg-[#FFF5F5] p-4 rounded-xl">
+<p className="text-sm text-gray-500">
+Calories
+</p>
+<h3 className="font-bold text-[#FF3B4E]">
+{product.nutrition.calories}
+</h3>
+</div>
+
+)
+}
+
+{
+product.nutrition?.protein && (
+
+<div className="bg-[#FFF5F5] p-4 rounded-xl">
+<p className="text-sm text-gray-500">
+Protein
+</p>
+<h3 className="font-bold text-[#FF3B4E]">
+{product.nutrition.protein} g
+</h3>
+</div>
+
+)
+}
+
+{
+product.nutrition?.carbs && (
+
+<div className="bg-[#FFF5F5] p-4 rounded-xl">
+<p className="text-sm text-gray-500">
+Carbs
+</p>
+<h3 className="font-bold text-[#FF3B4E]">
+{product.nutrition.carbs} g
+</h3>
+</div>
+
+)
+}
+
+{
+product.nutrition?.fat && (
+
+<div className="bg-[#FFF5F5] p-4 rounded-xl">
+<p className="text-sm text-gray-500">
+Fat
+</p>
+<h3 className="font-bold text-[#FF3B4E]">
+{product.nutrition.fat} g
+</h3>
+</div>
+
+)
+}
+
+</div>
+
+</div>
+
+)
+}
+
+{/* INGREDIENTS */}
+
+{
+product.ingredients?.length > 0 && (
+
+<div
+className="
+bg-white
+rounded-3xl
+shadow-lg
+p-6
+mt-6
+"
+>
+
+<h2
+className="
+font-bold
+text-xl
+mb-4
+"
+>
+Ingredients
+</h2>
+
+<div
+className="
+flex
+flex-wrap
+gap-2
+"
+>
+
+{
+product.ingredients.map(
+(item,index)=>(
+<span
+key={index}
+className="
+px-3
+py-1
+bg-green-100
+text-green-700
+rounded-full
+text-sm
+"
+>
+{item}
+</span>
+)
+)
+}
+
+</div>
+
+</div>
+
+)
+}
+
+{/* ALLERGENS */}
+
+{
+product.allergens?.length > 0 && (
+
+<div
+className="
+bg-white
+rounded-3xl
+shadow-lg
+p-6
+mt-6
+"
+>
+
+<h2
+className="
+font-bold
+text-xl
+mb-4
+"
+>
+Allergens
+</h2>
+
+<div
+className="
+flex
+flex-wrap
+gap-2
+"
+>
+
+{
+product.allergens.map(
+(item,index)=>(
+<span
+key={index}
+className="
+px-3
+py-1
+bg-red-100
+text-red-700
+rounded-full
+text-sm
+"
+>
+⚠️ {item}
+</span>
+)
+)
+}
+
+</div>
+
+</div>
+
+)
+}
+
+</div>
+
+</div>
 
 )
 }

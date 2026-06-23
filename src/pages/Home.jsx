@@ -10,8 +10,6 @@ import { Await } from "react-router-dom"
    setProducts] =
    useState([])
 
-   console.log(products)
-
    const getProducts =
    async()=>{
       try{
