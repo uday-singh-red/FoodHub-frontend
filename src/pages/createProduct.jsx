@@ -139,7 +139,7 @@ export default function CreateProduct(){
 
 
          const data =await res.json()
-         console.log(data.message)
+         console.log(data)
 
          if(data.success){
 
@@ -163,7 +163,11 @@ export default function CreateProduct(){
       catch(error){
 
          console.log(error)
-          setSuccess("Something went wrong")
+          setError("Something went wrong")
+
+           setTimeout(()=>{
+               setError("")
+            },3000)
       }
    }
 

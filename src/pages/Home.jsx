@@ -10,6 +10,8 @@ import { Await } from "react-router-dom"
    setProducts] =
    useState([])
 
+   console.log(products)
+
    const getProducts =
    async()=>{
       try{
@@ -85,7 +87,7 @@ import { Await } from "react-router-dom"
 
                      key={product._id}
 
-                     image={product.image}
+                     image={product.images[0].url}
 
                      name={product.name}
 

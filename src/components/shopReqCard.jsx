@@ -6,6 +6,75 @@ export default function ShopRequestCard({
 
 }) {
 
+
+   const approveShop = async (shopId) => {
+
+   try {
+
+      const res = await fetch(
+         `http://localhost:5000/api/v1/shops/approve/${shopId}`,
+         {
+            method: "PATCH",
+            credentials: "include"
+         }
+      );
+
+      const data = await res.json();
+
+      if (data.success) {
+
+         setPendingShops(prev =>
+            prev.filter(
+               shop => shop._id !== shopId
+            )
+         );
+
+         console.log(data.message);
+      }
+
+   }
+
+   catch (error) {
+
+      console.log(error);
+
+   }
+};
+
+const rejectShop = async (shopId) => {
+
+   try {
+
+      const res = await fetch(
+         `http://localhost:5000/api/v1/shops/reject/${shopId}`,
+         {
+            method: "DELETE",
+            credentials: "include"
+         }
+      );
+
+      const data = await res.json();
+
+      if (data.success) {
+
+         setPendingShops(prev =>
+            prev.filter(
+               shop => shop._id !== shopId
+            )
+         );
+
+         console.log(data.message);
+      }
+
+   }
+
+   catch (error) {
+
+      console.log(error);
+
+   }
+};
+
    return (
 
       <div

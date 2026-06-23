@@ -97,7 +97,7 @@ export default function Navbar() {
                   </span>
                 </Link>
 
-                {user?.role === "user" && (
+                {user && (
                   <Link
                     to="/create-shop"
                     className="
