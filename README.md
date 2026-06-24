@@ -1,16 +1,127 @@
-# React + Vite
+# 🍔 Food Ordering App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack food ordering platform where customers can order food, shopkeepers can manage their shops and products, and admins can manage the entire platform through a dedicated dashboard.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Customer
 
-## React Compiler
+- Browse food products
+- View detailed product information
+- Add products to cart
+- Update cart quantity
+- Remove products from cart
+- Place orders
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Shopkeeper
 
-## Expanding the ESLint configuration
+- Create shop request
+- Manage approved shop
+- Create products
+- Update products
+- View orders
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Admin
+
+- Approve shop requests
+- Reject shop requests
+- Create products
+- Manage products
+- Manage orders
+
+## 🛠 Tech Stack
+
+### Frontend
+
+- React
+- React Router DOM
+- Tailwind CSS
+- Context API
+- React Icons
+- Vite
+
+### Backend
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- Cloudinary
+- JWT Authentication
+
+## 📂 Project Structure
+
+```bash
+SRC
+│   App.jsx
+│   index.css
+│   main.jsx
+│   
+├───assets
+│       hero.png
+│       react.svg
+│       vite.svg
+│       
+├───components
+│   │   AdminProductCard.jsx
+│   │   CartCard.jsx
+│   │   Navbar.jsx
+│   │   OrderCard.jsx
+│   │   ProductCard.jsx
+│   │   shopReqCard.jsx
+│   │   
+│   └───Product
+│           ProductBasicInfo.jsx
+│           ProductExtraInfo.jsx
+│           
+├───context
+│       AuthContext.jsx
+│       CartContext.jsx
+│       
+├───costomHook
+│       useGoogleLogin.jsx
+│       userLogout.jsx
+│       
+├───firebase
+│       firebase.js
+│       
+└───pages
+        admin.jsx
+        adminEdit.jsx
+        AdminOrders.jsx
+        Cart.jsx
+        createProduct.jsx
+        createShop.jsx
+        EditProduct.jsx
+        Home.jsx
+        Login.jsx
+        OrderPage.jsx
+        ProductInfo.jsx
+        Profile.jsx
+        Register.jsx
+        VerifyOtp.jsx
+
+
+## 📱 Responsive Design
+
+The application is responsive and optimized for:
+
+- Mobile Devices
+- Tablets
+- Desktop Screens
+
+## 🎯 Future Improvements
+
+- Online Payments
+- Product Search
+- Product Filters
+- Reviews & Ratings
+- Wishlist
+- Real-time Order Tracking
+- Notifications
+
+## 👨‍💻 Author
+
+Uday Singh
+
+Want to build something that people use every day.
