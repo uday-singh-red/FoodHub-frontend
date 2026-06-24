@@ -53,6 +53,8 @@ export default function Cart(){
 
    (total,item)=>
 
+   
+
       total +
       (
          item.product.price *

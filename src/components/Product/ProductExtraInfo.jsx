@@ -61,7 +61,7 @@ export default function ProductExtraInfo({
    rounded-2xl
    overflow-hidden
    gap-5
-   bg-red-500
+   
 
    "
 >
