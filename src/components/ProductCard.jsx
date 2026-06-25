@@ -5,7 +5,7 @@ import { useCart } from "../context/CartContext"
 
 
 
-export default function ProductCard({ image,name,description,_id}){
+export default function ProductCard({ image,name,description,_id,price}){
    const navigate = useNavigate()
    const { user } = useAuth()
    const { setCartCount } = useCart();
@@ -144,25 +144,18 @@ export default function ProductCard({ image,name,description,_id}){
 
          <div
          className="
-         flex
-         items-center
-         gap-1
          mt-2
          "
          >
 
-         <span className="text-yellow-500">
-         ⭐
-         </span>
-
          <span
          className="
-         text-xs
-         font-semibold
-         text-gray-700
+         text-lg
+         font-bold
+         text-[#FF3B4E]
          "
          >
-         4.8
+         ₹ {price}
          </span>
 
          </div>

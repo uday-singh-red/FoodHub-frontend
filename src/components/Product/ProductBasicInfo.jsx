@@ -36,6 +36,7 @@ export default function ProductBasicInfo({
         border
         border-red-100
         h-fit
+        space-y-4
          "
       >
 

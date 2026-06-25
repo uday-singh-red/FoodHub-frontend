@@ -89,6 +89,8 @@ import { Await } from "react-router-dom"
 
                      name={product.name}
 
+                     price={product.price}
+
                      description={
                         product.description
                      }

@@ -23,7 +23,7 @@ export default function AdminProductCard({ product }) {
    {/* IMAGE */}
 
    <img
-      src={product.image}
+      src={product.images?.[0].url}
       alt={product.name}
       className="
       w-16
