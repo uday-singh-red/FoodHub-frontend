@@ -38,7 +38,7 @@ export default function Navbar() {
           </Link>
 
           {/* RIGHT */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-3 md:gap-6">
 
             <Link
               to="/"
@@ -53,11 +53,27 @@ export default function Navbar() {
               "
             >
               <FaHome />
-              <span>Home</span>
+              <span className="hidden md:inline">Home</span>
             </Link>
 
             {user && (
               <>
+
+               <Link
+                  to="/shops"
+                  className="
+                  flex
+                  items-center
+                  gap-2
+                  text-gray-700
+                  hover:text-red-500
+                  font-medium
+                  transition
+                  "
+                >
+                  <FaStore />
+                  <span className="hidden md:inline">Shops</span>
+                </Link>
                 {/* CART */}
                 <Link
                   to="/cart"
@@ -74,7 +90,7 @@ export default function Navbar() {
                 >
                   <FaShoppingCart size={20} />
 
-                  <span>Cart</span>
+                  <span className="hidden md:inline">Cart</span>
 
                   <span
                     className="
@@ -97,23 +113,6 @@ export default function Navbar() {
                   </span>
                 </Link>
 
-                {user && (
-                  <Link
-                    to="/create-shop"
-                    className="
-                    flex
-                    items-center
-                    gap-2
-                    text-gray-700
-                    hover:text-red-500
-                    font-medium
-                    transition
-                    "
-                  >
-                    <FaStore />
-                    <span>Create Shop</span>
-                  </Link>
-                )}
 
                 {/* PROFILE */}
                 <Link
@@ -136,8 +135,10 @@ export default function Navbar() {
                       )}
                       alt="avatar"
                       className="
-                      w-10
-                      h-10
+                      w-8
+                      h-8
+                      md:h-10
+                      md:w-10
                       rounded-full
                       object-cover
                       border-2

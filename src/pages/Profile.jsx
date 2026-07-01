@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useLogout } from "../costomHook/userLogout";
-import { FaUserShield } from "react-icons/fa";
+import { FaUserShield , FaStore} from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Profile() {
   const logout = useLogout();
@@ -256,6 +257,24 @@ export default function Profile() {
               </button>
             )
           }
+
+           {user && (
+                  <Link
+                    to="/create-shop"
+                    className="
+                    flex
+                    items-center
+                    gap-2
+                    text-gray-700
+                    hover:text-red-500
+                    font-medium
+                    transition
+                    "
+                  >
+                    <FaStore />
+                    <span className="hidden md:inline">Create Shop</span>
+                  </Link>
+                )}
 
           </div>
 
