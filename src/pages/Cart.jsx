@@ -17,7 +17,7 @@ export default function Cart(){
 
    const getCart = async()=>{
 
-       console.time("getCart");
+       
 
       try{
          const res =
@@ -31,7 +31,7 @@ export default function Cart(){
          const data =await res.json()
          console.log(data)
 
-          console.timeEnd("getCart")
+          
 
          if(data.success){
 

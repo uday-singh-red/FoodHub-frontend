@@ -11,172 +11,161 @@ export default function ShopCard({ shop }) {
    return (
 
       <div
-         onClick={() =>
+
+         onClick={()=>
             navigate(`/shop/${shop._id}`)
          }
+
          className="
          bg-white
-         rounded-3xl
+         rounded-2xl
+         overflow-hidden
          shadow-md
          hover:shadow-xl
+         hover:-translate-y-1
          transition-all
          duration-300
-         overflow-hidden
-         cursor-pointer
          border
          border-red-100
-         hover:border-red-300
+         cursor-pointer
          "
+
       >
 
          {/* Banner */}
 
-         <div
-            className="
-            h-24
-            bg-gray-100
-            relative
-            "
-         >
+         <div className="relative h-28">
 
             <img
+
                src={
                   shop.shopBanner ||
-                  "https://placehold.co/1200x300?text=FoodHub"
+                  "https://placehold.co/600x250"
                }
+
                alt={shop.shopName}
+
                className="
                w-full
                h-full
                object-cover
                "
+
             />
 
-            {/* Logo */}
+            <img
 
-            <div
+               src={
+                  shop.shopLogo ||
+                  "https://placehold.co/100"
+               }
+
+               alt={shop.shopName}
+
                className="
                absolute
+               left-4
                -bottom-8
-               left-6
+               w-16
+               h-16
+               rounded-xl
+               object-cover
+               border-4
+               border-white
+               bg-white
+               shadow-lg
                "
-            >
 
-               <img
-                  src={
-                     shop.shopLogo ||
-                     "https://placehold.co/100x100?text=Shop"
-                  }
-                  alt={shop.shopName}
-                  className="
-                  w-16
-                  h-16
-                  rounded-2xl
-                  object-cover
-                  border-4
-                  border-white
-                  shadow-lg
-                  bg-white
-                  "
-               />
-
-            </div>
+            />
 
          </div>
 
-         {/* Content */}
+         {/* Body */}
 
-         <div
-            className="
-            pt-10
-            pb-4
-            px-5
-            "
-         >
+         <div className="pt-11 px-4 pb-4">
+
+            <h2
+               className="
+               text-lg
+               font-bold
+               text-gray-800
+               truncate
+               "
+            >
+               {shop.shopName}
+            </h2>
+
+            <p
+               className="
+               text-sm
+               text-gray-500
+               mt-2
+               line-clamp-2
+               h-10
+               "
+            >
+               {
+                  shop.description ||
+                  "Fresh food delivered fast."
+               }
+            </p>
 
             <div
                className="
                flex
-               justify-between
-               items-start
-               gap-4
+               items-center
+               gap-2
+               mt-3
+               text-sm
+               text-gray-500
                "
             >
 
-               <div className="flex-1">
+               <FaMapMarkerAlt
+                  className="text-red-500"
+               />
 
-                  <h2
-                     className="
-                     text-xl
-                     font-bold
-                     text-gray-800
-                     "
-                  >
-                     {shop.shopName}
-                  </h2>
+               <span className="truncate">
 
-                  <p
-                     className="
-                     text-gray-500
-                     mt-2
-                     line-clamp-2
-                     "
-                  >
-                     {shop.description ||
-                        "Fresh delicious food waiting for you."}
-                  </p>
+                  {
+                     shop.address ||
+                     "Address unavailable"
+                  }
 
-                  <div
-                     className="
-                     flex
-                     items-center
-                     gap-2
-                     mt-4
-                     text-gray-600
-                     "
-                  >
-
-                     <FaMapMarkerAlt
-                        className="
-                        text-red-500
-                        "
-                     />
-
-                     <span>
-                        {shop.address || "Address not available"}
-                     </span>
-
-                  </div>
-
-               </div>
-
-               <button
-                  className="
-                  bg-[#FF3B4E]
-                  text-white
-                  px-4
-                  py-2
-                  rounded-xl
-                  flex
-                  items-center
-                  gap-2
-                  hover:bg-red-600
-                  transition
-                  shrink-0
-                  "
-               >
-
-                  Visit
-
-                  <FaArrowRight />
-
-               </button>
+               </span>
 
             </div>
+
+            <button
+
+               className="
+               mt-5
+               w-full
+               bg-[#FF3B4E]
+               text-white
+               py-2.5
+               rounded-xl
+               flex
+               justify-center
+               items-center
+               gap-2
+               font-semibold
+               hover:bg-red-600
+               transition
+               "
+
+            >
+
+               Visit Shop
+
+               <FaArrowRight/>
+
+            </button>
 
          </div>
 
       </div>
 
    );
+
 }

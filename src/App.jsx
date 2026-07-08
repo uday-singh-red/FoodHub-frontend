@@ -17,6 +17,7 @@ import AdminEdit from "./pages/adminEdit";
 import EditProduct from "./pages/EditProduct";
 import CreateShop from "./pages/createShop";
 import Shops from "./pages/Shops";
+import Shop from "./pages/Shop";
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
         <Route path="/admin/edit-product/:id" element={<EditProduct/>} />
         <Route path="/create-shop" element={<CreateShop/>} />
         <Route path="/shops" element={<Shops/>} />
+        <Route path="/shop/:id" element={<Shop/>} />
 
       </Routes>
     </>

@@ -291,21 +291,35 @@ const [preview,setPreview] = useState("");
    className="
    mt-4
    flex
-   flex-col
-   gap-3
+   justify-center
    "
 >
 
    <label
-      className="
-      bg-red-500
-      text-white
-      px-4
-      py-2
-      rounded-xl
-      cursor-pointer
-      text-center
-      "
+    className="
+inline-flex
+items-center
+justify-center
+gap-2
+bg-white
+border-2
+border-[#FF3B4E]
+text-[#FF3B4E]
+hover:bg-[#FF3B4E]
+hover:text-white
+transition-all
+duration-300
+rounded-xl
+px-6
+py-3
+font-semibold
+shadow-sm
+hover:shadow-lg
+w-fit
+sm:w-auto
+sm:min-w-[190px]
+cursor-pointer
+"
    >
       Change Image
 
@@ -339,26 +353,45 @@ const [preview,setPreview] = useState("");
             )
          }
 
-         <button
+<div className="
+mt-4
+flex
+justify-center
+">
+            <button
 
          onClick={updateProduct}
 
          className="
-         w-full
-         mt-8
-         bg-red-500
-         text-white
-         py-4
-         rounded-2xl
-         font-bold
-         text-lg
-         hover:bg-red-600
+      inline-flex
+items-center
+justify-center
+gap-2
+bg-white
+border-2
+border-[#FF3B4E]
+text-[#FF3B4E]
+hover:bg-[#FF3B4E]
+hover:text-white
+transition-all
+duration-300
+rounded-xl
+px-6
+py-3
+font-semibold
+shadow-sm
+hover:shadow-lg
+w-fit
+sm:w-auto
+sm:min-w-[190px]
+cursor-pointer
          "
          >
 
             Update Product
 
          </button>
+</div>
 
       </div>
 

@@ -19,6 +19,7 @@ import { Await } from "react-router-dom"
          )
 
          const data =await res.json()
+         console.log(data)
 
 
          if(data.success){

@@ -143,7 +143,8 @@ useEffect(()=>{
             "
          >
 
-            <h1
+            {
+               user.role=='admin' ?<> <h1
                className="
                text-4xl
                font-bold
@@ -151,8 +152,7 @@ useEffect(()=>{
                "
             >
                Admin Dashboard
-            </h1>
-
+            </h1>             
             <p
                className="
                text-gray-600
@@ -160,7 +160,31 @@ useEffect(()=>{
                "
             >
                Manage products, orders and shop requests
-            </p>
+            </p> </> :
+            <>
+            <h1
+              className="
+               text-4xl
+               font-bold
+               text-red-500
+               "
+            >
+               Shop Owner Dashboard
+            </h1>
+                        <p
+               className="
+               text-gray-600
+               mt-2
+               "
+            >
+               Manage products and orders
+            </p> 
+            </>
+            }
+
+           
+
+
 
          </div>
 

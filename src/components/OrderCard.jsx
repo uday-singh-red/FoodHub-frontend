@@ -5,18 +5,24 @@ export default function OrderCard({
 
 }) {
 
+   console.log(order)
+
    return (
 
       <div
          className="
-        bg-white
-         rounded-2xl
-         overflow-hidden
-         shadow-lg
-         border
-         border-red-100
-         max-w-[320px]
-         mx-auto
+     bg-white
+      rounded-3xl
+      overflow-hidden
+      shadow-md
+      hover:shadow-xl
+      transition-all
+      duration-300
+      border
+      border-red-100
+      w-full
+      max-w-[360px]
+      mx-auto
          "
       >
 
@@ -24,13 +30,13 @@ export default function OrderCard({
 
          <img
 
-            src={order.product?.image}
+            src={order.product?.images[0]?.url}
 
             alt={order.product?.name}
 
             className="
-            w-full
-            h-[200px]
+           w-full
+            h-56
             object-cover
             "
          />
