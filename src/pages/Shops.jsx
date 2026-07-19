@@ -112,7 +112,7 @@ export default function Shops() {
 
          <div
             className="
-          max-w-7xl
+         max-w-7xl
          mx-auto
          p-5
          grid
