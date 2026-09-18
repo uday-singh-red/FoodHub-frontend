@@ -3,7 +3,8 @@ import {
    FaPlus,
    FaClipboardList,
    FaEdit,
-   FaStore
+   FaStore,
+   FaQrcode
 } from "react-icons/fa";
 
 import { useEffect } from "react";
@@ -11,13 +12,15 @@ import { useState } from "react";
 
 import ShopRequestCard from "../components/shopReqCard";
 import { useAuth } from "../context/AuthContext";
+import QRCodeComponent from "../components/QRCode"
 
 export default function Admin() {
 
-   const {user}= useAuth();
+   const {user,loading}= useAuth();
 
-   const [
-   pendingShops, setPendingShops] = useState([]);
+   const [pendingShops, setPendingShops] = useState([]);
+
+   const [shopUrl, setShopUrl] = useState("");
 
 
 
@@ -114,11 +117,60 @@ export default function Admin() {
    }
 }
 
+const generateQR = async () => {
+
+   try {
+
+      const res =
+      await fetch(
+         "http://localhost:5000/api/v1/shops/generate-qr",
+         {
+            method: "GET",
+            credentials: "include"
+         }
+      );
+
+      const data =
+      await res.json();
+
+      console.log(data);
+
+      if(data.success){
+
+        setShopUrl(data.url);
+
+      }
+
+   }
+
+   catch(error){
+
+      console.log(error);
+
+   }
+}
+
 useEffect(()=>{
 
    getPendingShops();
 
 },[]);
+
+if (loading) {
+   return (
+      <div className="min-h-screen flex items-center justify-center">
+         Loading...
+      </div>
+   );
+}
+
+if (!user) {
+   return (
+      <div className="min-h-screen flex items-center justify-center">
+         Please login
+      </div>
+   );
+}
 
 
    return (
@@ -144,7 +196,7 @@ useEffect(()=>{
          >
 
             {
-               user.role=='admin' ?<> <h1
+               user.role==="admin" ? <> <h1
                className="
                text-4xl
                font-bold
@@ -302,6 +354,51 @@ useEffect(()=>{
             </Link>
 
          </div>
+
+         {user?.role === "shopkeeper" && (
+
+   <button
+      onClick={generateQR}
+      className="
+      bg-white
+      rounded-2xl
+      shadow-md
+      p-6
+      hover:shadow-xl
+      transition
+      border-l-4
+      border-red-500
+      text-left
+      "
+   >
+
+      <FaQrcode
+         size={28}
+         className="mb-3 text-red-500"
+      />
+
+      <h2
+         className="
+         text-xl
+         font-bold
+         "
+      >
+         Generate QR
+      </h2>
+
+      <p className="text-gray-500 mt-2">
+         Generate QR code for your shop
+      </p>
+
+   </button>
+
+)}
+
+{shopUrl && (
+   <div className="mt-8">
+      <QRCodeComponent url={shopUrl} />
+   </div>
+)}
 
          {/* PENDING SHOP REQUESTS */}
 
